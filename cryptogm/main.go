@@ -35,6 +35,7 @@ func testsm2hadd(m1 *big.Int, m2 *big.Int) {
 
 	// 计算解密前的消息总和
 	preDecryptionSum := new(big.Int).Add(m1, m2)
+	fmt.Printf("m1:%v, m2:%v\n", m1, m2)
 	fmt.Printf("解密前的消息总和: %s\n", preDecryptionSum)
 	// 显示解密后的总和
 	fmt.Printf("解密得到的消息总和: %d\n", sum)
