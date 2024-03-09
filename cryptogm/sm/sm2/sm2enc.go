@@ -8,6 +8,8 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
+	"fmt"
+	"github.com/xlcetc/cryptogm/elliptic/sm2curve"
 	"io"
 	"math"
 	"math/big"
@@ -135,6 +137,7 @@ func LgwHEnc(rand io.Reader, key *PublicKey, m *big.Int) (x1, y1, c2x, c2y *big.
 }
 
 func LgwHDec(key *PrivateKey, c1x, c1y, c2x, c2y *big.Int) (int, error) {
+	fmt.Printf("\n\nkey: %v\nc1x: %v\nc1y: %v\nc2x: %v\nc2y: %v\n", key, c1x, c1y, c2x, c2y)
 	var m int = -1
 	x2, y2 := key.Curve.ScalarMult(c1x, c1y, key.D.Bytes())
 	inv_y2 := new(big.Int)
@@ -339,7 +342,7 @@ func Decrypt(c []byte, key *PrivateKey) ([]byte, error) {
 	return t, nil
 }
 
-//uncompressed form, s=04||x||y
+// uncompressed form, s=04||x||y
 func pointToBytes(x, y *big.Int) []byte {
 	buf := []byte{}
 
@@ -375,7 +378,6 @@ func pointFromBytes(buf []byte) (x, y *big.Int) {
 	return
 }
 
-/*
 func init() {
 	c := sm2curve.P256()
 	var i int64 = 2
@@ -388,7 +390,7 @@ func init() {
 
 	T1[c.Params().Gx.String()] = 1
 	for ; i <= 16777216; i++ {
-		fmt.Printf("%d\n", i)
+		//fmt.Printf("%d\n", i)
 		x, y = c.Add(x, y, c.Params().Gx, c.Params().Gy)
 		T1[x.String()] = i
 		if i == 44 {
@@ -412,4 +414,3 @@ func init() {
 		//fmt.Println(T2y[j])
 	}
 }
-*/

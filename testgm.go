@@ -10,7 +10,7 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/btcsuite/btcd/btcec"
+	//"github.com/btcsuite/btcd/btcec"
 	"github.com/salviati/cuckoo"
 	"github.com/xlcetc/cryptogm/elliptic/sm9curve"
 	"github.com/xlcetc/cryptogm/sm/sm2"
